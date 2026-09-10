@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hr-wsi:wic-comb",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "CLMS HR-WSI Water and Ice Cover combined multi-sensor filename per the CLMS Filenaming Framework (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "project": {
+      "type": "string",
+      "enum": [
+        "WSI"
+      ],
+      "description": "Project code"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "WIC"
+      ],
+      "description": "Product code (Water and Ice Cover)"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "WIC",
+        "WIC-QA",
+        "MTD"
+      ],
+      "description": "Sub-variable hyphen-appended to the product code compound"
+    },
+    "sensor": {
+      "type": "string",
+      "enum": [
+        "S1A",
+        "S1B",
+        "COMB"
+      ],
+      "description": "Sensor platform, hyphenated into the compound for multi-sensor discrimination"
+    },
+    "sensing_datetime": {
+      "type": "string",
+      "pattern": "^\\d{8}T\\d{6}$",
+      "description": "Acquisition datetime (UTC)"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^R\\d{1,3}m$",
+      "description": "Spatial resolution, no zero-padding"
+    },
+    "tile_id": {
+      "title": "MGRS",
+      "type": "string",
+      "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+      "description": "MGRS tile identifier (as used by Sentinel-2 products)"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Single hyphenated version+revision token (R = Revision, not Release)"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif",
+        "xml"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{project}-{product}-{variable}-{sensor}_{sensing_datetime}_{resolution}_{tile_id}_{version_revision}[.{extension}]",
+  "examples": [
+    "CLMS_WIC-WIC_20160720T105547_S1A_020m_T31TCH_V01-R00.tif"
+  ],
+  "counter_examples": [
+    "CLMS_WSI_WIC_020m_T31TCH_20160720T105547_S2A_V100_WIC-QA.tif"
+  ]
+}

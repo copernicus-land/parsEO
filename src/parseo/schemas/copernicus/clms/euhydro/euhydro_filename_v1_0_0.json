@@ -1,10 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:euhydro",
-  "schema_version": "0.0.0",
-  "status": "deprecated",
-  "stac_version": "1.1.0",
-  "description": "Copernicus EU Hydro filename schema covering status layer (extension optional).",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "Copernicus EU Hydro filename per the CLMS Filenaming Framework (extension optional).",
   "fields": {
     "programme": {
       "type": "string",
@@ -83,18 +82,8 @@
     },
     "epsg_code": {
       "type": "string",
-      "pattern": "^\\d{4,5}$",
-      "description": "Projected coordinate reference system expressed as a zero-padded EPSG code"
-    },
-    "version": {
-      "type": "string",
-      "pattern": "^V\\d{2}$",
-      "description": "Product version"
-    },
-    "revision": {
-      "type": "string",
-      "pattern": "^R\\d{2}$",
-      "description": "Revision identifier"
+      "pattern": "^\\d{4}$",
+      "description": "Bare EPSG code, no zero-padding (e.g., 3035)"
     },
     "production_date": {
       "type": "string",
@@ -105,12 +94,17 @@
       "type": "string",
       "pattern": "^(gpkg|gdb|fgb|parquet|tif)$",
       "description": "Optional file extension without leading dot"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Single hyphenated version+revision (R=Revision)"
     }
   },
-  "template": "{programme}_{product}_{subtheme}_{survey}_{type}{resolution}_{tile_id}_[{spatial_coverage}_]{epsg_code}_{version}_{revision}_{production_date}[.{extension}]",
+  "template": "{programme}_{product}_{subtheme}_{survey}_{type}{resolution}_{tile_id}_[{spatial_coverage}_]{epsg_code}_{version_revision}_{production_date}[.{extension}]",
   "examples": [
-    "CLMS_EUHYDRO_NET_S2026_V10m_EU_03035_V02_R00_20261015.gpkg",
-    "CLMS_EUHYDRO_DIR_S2026_V10m_EU_03035_V02_R00_20261015.tif",
-    "CLMS_EUHYDRO_SUB_S2021_V05HA_E35N49_EU27_03035_V01_R01_20260211"
+    "CLMS_EUHYDRO_NET_S2026_V10m_EU_3035_V02-R00_20261015.gpkg",
+    "CLMS_EUHYDRO_DIR_S2026_V10m_EU_3035_V02-R00_20261015.tif",
+    "CLMS_EUHYDRO_SUB_S2021_V05HA_E35N49_EU27_3035_V01-R01_20260211"
   ]
 }

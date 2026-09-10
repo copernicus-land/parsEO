@@ -1,10 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:ua-stl",
-  "schema_version": "0.0.0",
-  "status": "deprecated",
-  "stac_version": "1.1.0",
-  "description": "Copernicus Urban Atlas filename schema covering the street tree layer (extension optional).",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "Copernicus Urban Atlas Street Tree Layer filename per the CLMS Filenaming Framework (extension optional).",
   "fields": {
     "programme": {
       "type": "string",
@@ -18,14 +17,14 @@
       "enum": [
         "UA"
       ],
-      "description": "Product code (Urban Atlas)"
+      "description": "Product code"
     },
     "variable": {
       "type": "string",
       "enum": [
         "STL"
       ],
-      "description": "Urban Atlas sub-theme identifier"
+      "description": "Street Tree Layer"
     },
     "survey": {
       "type": "string",
@@ -58,18 +57,8 @@
     },
     "epsg_code": {
       "type": "string",
-      "pattern": "^\\d{4,5}$",
-      "description": "Projected coordinate reference system expressed as a zero-padded EPSG code"
-    },
-    "version": {
-      "type": "string",
-      "pattern": "^V\\d{2}$",
-      "description": "Product version"
-    },
-    "revision": {
-      "type": "string",
-      "pattern": "^R\\d{2}$",
-      "description": "Revision identifier"
+      "pattern": "^\\d{4}$",
+      "description": "Bare EPSG code, no zero-padding (e.g., 3035)"
     },
     "production_date": {
       "type": "string",
@@ -80,10 +69,15 @@
       "type": "string",
       "pattern": "^[A-Za-z0-9]+(?:\\.[A-Za-z0-9]+)?$",
       "description": "Optional file extension without leading dot (allows compound extensions such as gpkg.zip)"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Single hyphenated version+revision (R=Revision)"
     }
   },
-  "template": "{programme}_{product}_{variable}_{survey}_{type}_{area_code}_{city}_{epsg_code}_{version}_{revision}_{production_date}[.{extension}]",
+  "template": "{programme}_{product}-{variable}_{survey}_{type}_{area_code}_{city}_{epsg_code}_{version_revision}_{production_date}[.{extension}]",
   "examples": [
-    "CLMS_UA_STL_S2021_VEC_AT001L3_WIEN_03035_V01_R01_20251030.gpkg"
+    "CLMS_UA-STL_S2021_V025ha_DK004L3_AALBORG_3035_V01-R00_20240212"
   ]
 }

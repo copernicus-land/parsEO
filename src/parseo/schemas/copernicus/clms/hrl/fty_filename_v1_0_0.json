@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hrl:fty",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "CLMS High Resolution Layer Forest Type filename per the CLMS Filenaming Framework (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "HRL"
+      ],
+      "description": "Umbrella code for legacy HRL products"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "FTY"
+      ],
+      "description": "HRL product code (Forest Type)"
+    },
+    "temporal_coverage": {
+      "type": "string",
+      "pattern": "^(?:S\\d{4}|C\\d{4}-\\d{4})$",
+      "description": "Temporal coverage (S=status, C=change)"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "R"
+      ],
+      "description": "Data type raster"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^\\d{1,3}m$",
+      "description": "Spatial resolution, no zero-padding"
+    },
+    "tile_id": {
+      "type": "string",
+      "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+      "description": "LAEA tile identifier"
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "Bare EPSG code (e.g., 3035)"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Hyphenated version+revision"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif"
+      ],
+      "description": "File extension"
+    }
+  },
+  "template": "{programme}_{product}-{variable}_{temporal_coverage}_{type}{resolution}_{tile_id}_{epsg_code}_{version_revision}[.{extension}]",
+  "examples": [
+    "CLMS_HRL-FTY_S2021_R10m_E27N48_3035_V01-R00.tif"
+  ]
+}

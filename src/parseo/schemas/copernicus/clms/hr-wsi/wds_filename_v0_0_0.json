@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:hr-wsi:wds",
   "schema_version": "0.0.0",
-  "status": "current",
+  "status": "deprecated",
   "description": "CLMS HR-WSI Water Detection and Surface Displacement product filename (extension optional).",
   "fields": {
     "programme": {

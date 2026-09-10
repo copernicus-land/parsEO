@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:egms-l3",
-  "schema_version": "0.0.0",
-  "status": "deprecated",
+  "schema_version": "1.0.0",
+  "status": "current",
   "description": "Copernicus European Ground Motion Service Level 3 velocity grid filename (extension optional).",
   "fields": {
     "product": {
@@ -42,11 +42,6 @@
       "pattern": "^\\d{4}$",
       "description": "End year of the velocity estimation period"
     },
-    "version": {
-      "type": "string",
-      "pattern": "^\\d+$",
-      "description": "Product version"
-    },
     "extension": {
       "type": "string",
       "enum": [
@@ -54,9 +49,14 @@
         "tiff"
       ],
       "description": "File extension without leading dot"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^\\d+$",
+      "description": "Product version/revision"
     }
   },
-  "template": "{product}_{level}_{tile}_{tile_size}_{component}_{start_year}_{end_year}_{version}[.{extension}]",
+  "template": "{product}_{level}_{tile}_{tile_size}_{component}_{start_year}_{end_year}_{version_revision}[.{extension}]",
   "examples": [
     "EGMS_L3_E28N49_100km_U_2018_2022_1.tiff",
     "EGMS_L3_E37N28_100km_U_2019_2023_1.tiff"

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:vi",
   "schema_version": "0.0.0",
-  "status": "current",
+  "status": "deprecated",
   "description": "Copernicus Land Monitoring Service Vegetation Index filename schema covering the HR-VPP suite (FAPAR, LAI, NDVI, PPI, FCOVER, DMP).",
   "fields": {
     "programme": {

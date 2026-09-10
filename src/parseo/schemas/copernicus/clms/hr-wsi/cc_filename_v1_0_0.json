@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hr-wsi:cc",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "CLMS HR-WSI Coastal Zones (CZ) filename per the CLMS Filenaming Framework (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "CC"
+      ],
+      "description": "Product code for Coastal Zones"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "CC",
+        "CC-QA",
+        "QAFLAGS",
+        "MTD"
+      ],
+      "description": "Coastal Zones variable"
+    },
+    "sensor": {
+      "type": "string",
+      "enum": [
+        "S2A",
+        "S2B",
+        "S2C",
+        "COMB"
+      ],
+      "description": "Satellite platform or combination"
+    },
+    "pixel_spacing": {
+      "type": "string",
+      "enum": [
+        "020m"
+      ],
+      "description": "Pixel spacing"
+    },
+    "tile_id": {
+      "title": "MGRS",
+      "type": "string",
+      "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+      "description": "MGRS tile identifier"
+    },
+    "sensing_datetime": {
+      "type": "string",
+      "pattern": "^\\d{8}T\\d{6}$",
+      "description": "Acquisition datetime (UTC)"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Single hyphenated version+revision (R=Revision)"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif",
+        "xml"
+      ],
+      "description": "File extension"
+    }
+  },
+  "template": "{programme}_{product}-{variable}_{sensing_datetime}_{sensor}_{pixel_spacing}_{tile_id}_{version_revision}[.{extension}]",
+  "examples": [
+    "CLMS_CC-CC_20211018T103021_S2A_020m_T32TNS_V01-R00.tif",
+    "CLMS_CC-CC-QA_20211018T103021_S2B_020m_T32TNS_V01-R00.tif"
+  ]
+}

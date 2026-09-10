@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:hrl:swf",
   "schema_version": "0.0.0",
-  "status": "deprecated",
+  "status": "current",
   "description": "CLMS High Resolution Layer Small Woody Features product filename (extension optional).",
   "fields": {
     "variable": {

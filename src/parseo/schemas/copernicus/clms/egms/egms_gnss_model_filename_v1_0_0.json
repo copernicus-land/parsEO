@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:egms-gnss-model",
-  "schema_version": "0.0.0",
-  "status": "deprecated",
+  "schema_version": "1.0.0",
+  "status": "current",
   "description": "Copernicus European Ground Motion Service GNSS model filename.",
   "fields": {
     "product": {
@@ -24,17 +24,17 @@
       "pattern": "^V\\d{4}$",
       "description": "Year of issue"
     },
-    "revision": {
-      "type": "string",
-      "pattern": "^\\d$",
-      "description": "Revision within the year (0 pre-release, 1 first full release)"
-    },
     "extension": {
       "type": "string",
       "enum": [
         "csv"
       ],
       "description": "File extension without leading dot"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^\\d$",
+      "description": "Revision within the year (0 pre-release, 1 first full release)"
     }
   },
   "template": "{product}_{variable}_{issue_year}.{revision}.{extension}",

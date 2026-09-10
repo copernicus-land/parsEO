@@ -1,10 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "schema_id": "copernicus:clms:ua-stl",
-  "schema_version": "0.0.0",
-  "status": "deprecated",
-  "stac_version": "1.1.0",
-  "description": "Copernicus Urban Atlas filename schema covering the street tree layer (extension optional).",
+  "schema_id": "copernicus:clms:ua-lcu",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "Copernicus Urban Atlas filename per the CLMS Filenaming Framework (extension optional).",
   "fields": {
     "programme": {
       "type": "string",
@@ -23,9 +22,12 @@
     "variable": {
       "type": "string",
       "enum": [
-        "STL"
+        "LCU",
+        "LCUC",
+        "BBH",
+        "GUA"
       ],
-      "description": "Urban Atlas sub-theme identifier"
+      "description": "Urban Atlas sub-theme"
     },
     "survey": {
       "type": "string",
@@ -35,16 +37,25 @@
     "type": {
       "type": "string",
       "enum": [
-        "VEC"
+        "V",
+        "R"
       ],
-      "description": "Data type vector",
+      "description": "Data type raster or vector",
       "stac_map": {
         "values": {
           "V": {
             "representation": "vector"
+          },
+          "R": {
+            "representation": "raster"
           }
         }
       }
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^(\\d{3}ha|\\d{2}m)$",
+      "description": "Spatial resolution or minimum mapping unit"
     },
     "area_code": {
       "type": "string",
@@ -58,18 +69,8 @@
     },
     "epsg_code": {
       "type": "string",
-      "pattern": "^\\d{4,5}$",
-      "description": "Projected coordinate reference system expressed as a zero-padded EPSG code"
-    },
-    "version": {
-      "type": "string",
-      "pattern": "^V\\d{2}$",
-      "description": "Product version"
-    },
-    "revision": {
-      "type": "string",
-      "pattern": "^R\\d{2}$",
-      "description": "Revision identifier"
+      "pattern": "^\\d{4}$",
+      "description": "Bare EPSG code, no zero-padding (e.g., 3035)"
     },
     "production_date": {
       "type": "string",
@@ -80,10 +81,18 @@
       "type": "string",
       "pattern": "^[A-Za-z0-9]+(?:\\.[A-Za-z0-9]+)?$",
       "description": "Optional file extension without leading dot (allows compound extensions such as gpkg.zip)"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Single hyphenated version+revision (R=Revision)"
     }
   },
-  "template": "{programme}_{product}_{variable}_{survey}_{type}_{area_code}_{city}_{epsg_code}_{version}_{revision}_{production_date}[.{extension}]",
+  "template": "{programme}_{product}-{variable}_{survey}_{type}{resolution}_{area_code}_{city}_{epsg_code}_{version_revision}_{production_date}[.{extension}]",
   "examples": [
-    "CLMS_UA_STL_S2021_VEC_AT001L3_WIEN_03035_V01_R01_20251030.gpkg"
+    "CLMS_UA-LCU_S2021_V025ha_DK004L3_AALBORG_3035_V01-R00_20240212",
+    "CLMS_UA-LCU_S2018_V025ha_DK004L3_AALBORG_3035_V02-R01_20240212",
+    "CLMS_UA-BBH_S2021_R10m_DK004L3_AALBORG_3035_V01-R00_20240212",
+    "CLMS_UA-GUA_S2021_V025ha_DK004L3_AALBORG_3035_V01-R11_20240212"
   ]
 }

@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:ua-dhm",
-  "schema_version": "0.0.0",
-  "status": "deprecated",
-  "description": "Copernicus Urban Atlas 2021 Digital Height Model (DHM) vector filename schema.",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "Copernicus Urban Atlas Digital Height Model filename per the CLMS Filenaming Framework (extension optional).",
   "fields": {
     "area_code": {
       "type": "string",
@@ -32,7 +32,7 @@
       "enum": [
         "DHM"
       ],
-      "description": "Product type (Digital Height Model)"
+      "description": "Digital Height Model"
     },
     "extension": {
       "type": "string",
@@ -44,10 +44,6 @@
   },
   "template": "{area_code}_{city}_{product}{reference_year}_{variable}[.{extension}]",
   "examples": [
-    "DE074Lx_G\u00d6RLITZ_UA2021_DHM.shp",
-    "DE510Lx_L\u00dcBECK_UA2021_DHM.shp",
-    "DK001Lx_K\u00d8BENHAVN_UA2021_DHM.shp",
-    "ES012Lx_VITORIA_GASTEIZ_UA2021_DHM.shp",
-    "ES031Lx_LUGO_UA2021_DHM.shp"
+    "CLMS_UA-DHM_S2021_R10m_DK004L3_AALBORG_3035_V01-R00_20240212"
   ]
 }
