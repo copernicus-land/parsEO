@@ -10,7 +10,6 @@ import re
 from typing import Any
 from typing import Dict
 from typing import Iterable
-from typing import Iterator
 from typing import Optional
 from typing import Union
 
