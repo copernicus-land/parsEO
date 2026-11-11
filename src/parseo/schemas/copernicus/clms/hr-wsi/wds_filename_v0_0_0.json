@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hr-wsi:wds",
+  "schema_version": "0.0.0",
+  "status": "current",
+  "description": "CLMS HR-WSI Water Detection and Surface Displacement product filename (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "project": {
+      "type": "string",
+      "enum": [
+        "WSI"
+      ],
+      "description": "Project"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "WDS"
+      ],
+      "description": "Product code"
+    },
+    "pixel_spacing": {
+      "type": "string",
+      "enum": [
+        "060m"
+      ],
+      "description": "Pixel spacing"
+    },
+    "tile_id": {
+      "title": "MGRS",
+      "type": "string",
+      "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+      "description": "MGRS tile identifier (as used by Sentinel-2 products)"
+    },
+    "sensing_datetime": {
+      "type": "string",
+      "pattern": "^\\d{8}T\\d{6}$",
+      "description": "Acquisition datetime (UTC)"
+    },
+    "platform": {
+      "type": "string",
+      "enum": [
+        "S1A",
+        "S1B",
+        "S1C"
+      ],
+      "description": "Satellite platform"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{3}$",
+      "description": "Product version"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "SSC",
+        "SSC-QA",
+        "MTD"
+      ],
+      "description": "File identifier"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif",
+        "xml"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{project}_{product}_{pixel_spacing}_{tile_id}_{sensing_datetime}_{platform}_{version}_{variable}[.{extension}]",
+  "examples": [
+    "CLMS_WSI_WDS_060m_T32TNS_20210217T053159_S1B_V100_SSC.tif"
+  ]
+}

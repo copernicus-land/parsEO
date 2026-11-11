@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hr-wsi:icd",
+  "schema_version": "0.0.0",
+  "status": "current",
+  "description": "CLMS HR-WSI Ice Cover Duration product filename (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "project": {
+      "type": "string",
+      "enum": [
+        "WSI"
+      ],
+      "description": "Project"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "ICD"
+      ],
+      "description": "Product code"
+    },
+    "pixel_spacing": {
+      "type": "string",
+      "enum": [
+        "020m",
+        "100m"
+      ],
+      "description": "Pixel spacing"
+    },
+    "tile_id": {
+      "description": "Regional LAEA grid tile or MGRS tile identifier",
+      "oneOf": [
+        {
+          "title": "INSPIRE ETRS89-LAEA Grid",
+          "type": "string",
+          "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+          "description": "Regional LAEA grid tile identifier (2- or 3-digit coordinates)"
+        },
+        {
+          "title": "MGRS",
+          "type": "string",
+          "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+          "description": "MGRS tile identifier (as used by Sentinel-2 products)"
+        }
+      ]
+    },
+    "period_start": {
+      "type": "string",
+      "pattern": "^\\d{8}P1Y$",
+      "description": "Aggregation period start"
+    },
+    "combination": {
+      "type": "string",
+      "enum": [
+        "COMB"
+      ],
+      "description": "Combination method"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{3}$",
+      "description": "Product version"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "ICD",
+        "NOBS1",
+        "NOBS2",
+        "ICD-QA",
+        "MTD"
+      ],
+      "description": "File identifier"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif",
+        "xml"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{project}_{product}_{pixel_spacing}_{tile_id}_{period_start}_{combination}_{version}_{variable}[.{extension}]",
+  "examples": [
+    "CLMS_WSI_ICD_020m_T31TCH_20160901P1Y_COMB_V100_ICD.tif",
+    "CLMS_WSI_ICD_100m_E70N20_20160901P1Y_COMB_V100_ICD-QA.tif"
+  ]
+}

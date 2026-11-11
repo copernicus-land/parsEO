@@ -4,10 +4,36 @@
   "schema_version": "1.0.0",
   "status": "current",
   "stac_version": "1.1.0",
-  "stac_extensions": ["processing", "sat", "eo"],
+
   "description": "Landsat Collection 2 scene identifier (extension optional).",
   "fields": {
-    "mission_code": {"type": "string", "enum": ["LT04", "LT05", "LE07", "LC08", "LC09"], "description": "Platform and sensor code"},
+    "platform": {
+      "type": "string",
+      "pattern": "^(LT04|LT05|LE07|LC08|LC09)$",
+      "description": "Platform and sensor code",
+      "stac_map": {
+        "LT04": {
+          "platform": "landsat-4",
+          "instruments": ["TM"]
+        },
+        "LT05": {
+          "platform": "landsat-5",
+          "instruments": ["TM"]
+        },
+        "LE07": {
+          "platform": "landsat-7",
+          "instruments": ["ETM+"]
+        },
+        "LC08": {
+          "platform": "landsat-8",
+          "instruments": ["OLI_TIRS"]
+        },
+        "LC09": {
+          "platform": "landsat-9",
+          "instruments": ["OLI_TIRS"]
+        }
+      }
+    },
     "processing_level": {"type": "string", "enum": ["L1TP", "L1GT", "L1GS", "L2SP", "L2SR"], "description": "Processing level"},
     "wrs_path": {"type": "string", "pattern": "^\\d{3}$", "description": "WRS-2 path"},
     "wrs_row": {"type": "string", "pattern": "^\\d{3}$", "description": "WRS-2 row"},
@@ -17,7 +43,7 @@
     "tier": {"type": "string", "enum": ["T1", "T2", "RT"], "description": "Tier classification"},
     "extension": {"type": "string", "pattern": "^[A-Za-z0-9]+$", "description": "File extension without leading dot"}
   },
-  "template": "{mission_code}_{processing_level}_{wrs_path}{wrs_row}_{acq_date}_{proc_date}_{collection_number}_{tier}[.{extension}]",
+  "template": "{platform}_{processing_level}_{wrs_path}{wrs_row}_{acq_date}_{proc_date}_{collection_number}_{tier}[.{extension}]",
   "examples": [
     "LC08_L1TP_190026_20200101_20200114_02_T1.tar"
   ]

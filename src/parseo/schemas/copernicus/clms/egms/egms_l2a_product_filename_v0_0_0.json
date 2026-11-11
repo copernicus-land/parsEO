@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:egms-l2a",
+  "schema_version": "0.0.0",
+  "status": "current",
+
+  "description": "Copernicus European Ground Motion Service Level 2 basic and calibrated product filename (extension optional).",
+  "fields": {
+    "product": {
+      "type": "string",
+      "enum": [
+        "EGMS"
+      ],
+      "description": "Constant service prefix"
+    },
+    "level": {
+      "type": "string",
+      "pattern": "^L[0-9]+[a-zA-Z]$",
+      "description": "Product processing level"
+    },
+    "track": {
+      "type": "string",
+      "pattern": "^\\d{3}$",
+      "description": "Sentinel-1 track number"
+    },
+    "burst": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "Progressive index of the burst inside the track"
+    },
+    "swath": {
+      "type": "string",
+      "pattern": "^IW[0-9]$",
+      "description": "Sentinel-1 IW swath identifier"
+    },
+    "polarisation": {
+      "type": "string",
+      "pattern": "^(?:VV|VH|HH|HV)$",
+      "description": "Polarisation of the SAR acquisition"
+    },
+    "start_year": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "First nominal year included in the product"
+    },
+    "end_year": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "Last nominal year included in the product"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+$",
+      "description": "Version of the delivered data"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "csv",
+        "zip"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{product}_{level}_{track}_{burst}_{swath}_{polarisation}_{start_year}_{end_year}_{version}[.{extension}]",
+  "examples": [
+    "EGMS_L2a_088_0282_IW2_VV_2018_2022_1.csv",
+    "EGMS_L2a_088_0282_IW2_VV_2018_2022_1.zip",
+    "EGMS_L2a_124_0135_IW1_VH_2015_2020_2.csv"
+  ]
+}

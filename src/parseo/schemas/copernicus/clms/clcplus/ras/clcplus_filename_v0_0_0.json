@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:clcplus",
+  "schema_version": "0.0.0",
+  "status": "deprecated",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json"
+  ],
+  "description": "CLMS CLC+ raster product filename (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Copernicus Land Monitoring Service programme identifier"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "CLCPLUS"
+      ],
+      "description": "Product family identifier"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "RASTER"
+      ],
+      "description": "Data class code (raster)",
+      "stac_map": {
+        "values": {
+          "RASTER": {
+            "representation": "raster"
+          }
+        }
+      }
+    },
+    "season": {
+      "type": "string",
+      "pattern": "^(\\d{4}|C\\d{4}-\\d{4})$",
+      "description": "Reference season and year (SYYYY) or change interval (CYYYY-YYYY)"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^\\d{3}m$",
+      "description": "Spatial resolution expressed with leading 'R' and units"
+    },
+    "tile_id": {
+      "description": "Tile identifier in the EEA 10m grid (easting/northing) or two-letter geographic code",
+      "oneOf": [
+        {
+          "title": "INSPIRE ETRS89-LAEA Grid",
+          "type": "string",
+          "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+          "description": "Regional LAEA grid tile identifier (2- or 3-digit coordinates)"
+        },
+        {
+          "title": "Geographic code",
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "description": "Two-letter geographic code used by VLCC vector products"
+        }
+      ]
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^0?\\d{4}$",
+      "description": "EPSG code of the product grid"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{1}_\\d{1}$",
+      "description": "Product version"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{product}_{type}_{season}_{resolution}_{tile_id}_{epsg_code}_{version}[.{extension}]",
+  "examples": [
+    "CLMS_CLCPLUS_RASTER_2018_010m_E48N37_03035_V1_1.tif"
+  ]
+}

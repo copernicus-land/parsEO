@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hrl:vlcc",
+  "schema_version": "0.0.0",
+  "status": "current",
+  "description": "CLMS High Resolution Layer Vegetated Land Cover Characteristics product filename (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant program prefix"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "HRLVLCC"
+      ],
+      "description": "High Resolution Layer theme identifier"
+    },
+    "variable": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{3,7}$",
+      "description": "Layer code (e.g., GRAMD1, CPBSACL, DLT, CPSCT)"
+    },
+    "temporal_coverage": {
+      "type": "string",
+      "pattern": "^(?:C\\d{4}(?:-\\d{4})?|P\\d{4}-\\d{4}|S\\d{4})$",
+      "description": "Temporal coverage token where CYYYY or CYYYY-YYYY captures change layers, PYYYY-YYYY captures period aggregates, and SYYYY captures status layers"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "R"
+      ],
+      "description": "Data type Raster/Vector"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^\\d{2,3}m$",
+      "description": "Spatial resolution"
+    },
+    "tile_id": {
+      "description": "Tile identifier in the EEA 10m grid (easting/northing) or two-letter geographic code",
+      "oneOf": [
+        {
+          "title": "INSPIRE ETRS89-LAEA Grid",
+          "type": "string",
+          "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+          "description": "Regional LAEA grid tile identifier (2- or 3-digit coordinates)"
+        },
+        {
+          "title": "Geographic code",
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "description": "Two-letter geographic code used by VLCC vector products"
+        }
+      ]
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^\\d{5}$",
+      "description": "EPSG code of the product grid"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(?:V\\d{2}|NEW)$",
+      "description": "Product version or NEW placeholder for provisional releases"
+    },
+    "release": {
+      "type": "string",
+      "pattern": "^R\\d{2}$",
+      "description": "Release identifier (optional when absent in source filenames)"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{product}_{variable}_{temporal_coverage}_{type}{resolution}_{tile_id}_{epsg_code}_{version}_{release}[.{extension}]",
+  "examples": [
+    "CLMS_HRLVLCC_GRA_S2021_R10m_E27N48_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CTY_S2021_R10m_E48N41_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_GRAMD1_S2017_R10m_E28N20_03035_V02_R00.tif",
+    "CLMS_HRLVLCC_GRAME_S2020_R10m_E49N44_03035_V02_R00.tif",
+    "CLMS_HRLVLCC_DLT_S2022_R10m_E17N09_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPBSA_S2021_R10m_E50N24_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPBSACL_S2017_R10m_E37N18_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPBSACL_S2017_R10m_E37N26_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPCSY_S2017_R10m_E32N28_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPCSY_S2017_R10m_E32N35_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPFLDCL_P2017-2021_R10m_E48N49_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPFLP_S2017_R10m_E41N29_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPMCD_S2018_R10m_E45N33_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPMCECL_S2021_R10m_E47N14_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPMCH_S2019_R10m_E51N42_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPMCHCL_S2018_R10m_E52N36_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_CPSCD_S2018_R10m_E12N22_03035_V01_R00.tif",
+    "CLMS_HRLVLCC_DLTCL_S2021_R10m_E43N41_03035_V01_R00.tif"
+  ]
+}

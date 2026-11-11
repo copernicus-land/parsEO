@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hrl:swf",
+  "schema_version": "0.0.1",
+  "status": "current",
+  "description": "CLMS High Resolution Layer Small Woody Features product filename (extension optional).",
+  "fields": {
+    "variable": {
+      "type": "string",
+      "enum": [
+        "SWF"
+      ],
+      "description": "Product code"
+    },
+    "reference_year": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "Reference year"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^(?:005m|010m|020m|100m)$",
+      "description": "Spatial resolution"
+    },
+    "tile_id": {
+      "title": "INSPIRE ETRS89-LAEA Grid",
+      "type": "string",
+      "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+      "description": "Regional LAEA grid tile identifier (2- or 3-digit coordinates)"
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^\\d{5}$",
+      "description": "EPSG code of the product grid"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{variable}_{reference_year}_{resolution}_{tile_id}_{epsg_code}[.{extension}]",
+  "examples": [
+    "SWF_2018_005m_E34N27_03035.tif",
+    "SWF_2018_005m_E36N31_03035.tif"
+  ]
+}

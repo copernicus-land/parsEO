@@ -4,6 +4,7 @@ from importlib import metadata
 from .assembler import assemble
 from .assembler import assemble_auto
 from .assembler import clear_schema_cache
+from .parser import parse
 from .parser import parse_auto
 from .parser import validate_schema
 from .schema_registry import get_schema_path
@@ -35,6 +36,7 @@ def info() -> dict[str, str]:
 
 
 __all__ = [
+    "parse",
     "parse_auto",
     "assemble",
     "assemble_auto",

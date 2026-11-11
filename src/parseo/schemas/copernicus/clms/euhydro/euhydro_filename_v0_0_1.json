@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:euhydro",
+  "schema_version": "0.0.1",
+  "status": "current",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/vector/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
+  ],
+  "description": "Copernicus EU Hydro filename schema for IE_NIR (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "EUHYDRO"
+      ],
+      "description": "Product code (EU Hydro)"
+    },
+    "subtheme": {
+      "type": "string",
+      "enum": [
+        "DEM",
+        "DIR",
+        "ACC",
+        "WBO",
+        "COAST",
+        "BAS",
+        "NET",
+        "ART"
+      ],
+      "description": "EU Hydro sub-theme identifier"
+    },
+    "survey": {
+      "type": "string",
+      "pattern": "^(?:S\\d{4})$",
+      "description": "Temporal coverage token (e.g., S2021)"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "R","V"
+      ],
+      "description": "Data type:vector or raster",
+      "stac_map": {
+        "values": {
+          "V": {
+            "representation": "vector"
+          }
+        }
+      }
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^(?:\\d{2,3}m|\\d{2}HA)$",
+      "description": "Spatial resolution or minimum mapping unit"
+    },
+    "tile_id": {
+      "description": "Tile identifier in the EEA 10m grid (easting/northing) or two-letter geographic code",
+      "oneOf": [
+        {
+          "title": "INSPIRE ETRS89-LAEA Grid",
+          "type": "string",
+          "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+          "description": "Regional LAEA grid tile identifier (2- or 3-digit coordinates)"
+        },
+        {
+          "title": "Geographic code",
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "description": "Two-letter geographic code used by VLCC vector products"
+        }
+      ]
+    },
+    "area_code": {
+      "type": "string",
+      "pattern": "^[A-Z]+\\_[A-Z]+$",
+      "description": "Area name identifier (letters)"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{2}$",
+      "description": "Product version"
+    },
+    "extension": {
+      "type": "string",
+      "pattern": "^(gpkg|gdb|fgb|parquet|tif)$",
+      "description": "Optional file extension without leading dot"
+    }
+  },
+  "template": "{programme}_{product}_{subtheme}_{area_code}_{version}[.{extension}]",
+  "examples": [
+    "CLMS_EUHYDRO_WBO_IE_NIR_V02.gpkg",
+    "CLMS_EUHYDRO_DIR_IE_NIR_V02.tif"
+  ]
+}

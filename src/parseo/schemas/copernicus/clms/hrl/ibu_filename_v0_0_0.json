@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hrl:ibu",
+  "schema_version": "0.0.0",
+  "status": "current",
+  "description": "CLMS High Resolution Layer Impervious Built-up Area product filename (extension optional).",
+  "fields": {
+    "variable": {
+      "type": "string",
+      "enum": [
+        "IBU"
+      ],
+      "description": "Product code"
+    },
+    "reference_year": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "Reference year"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^\\d{3}m$",
+      "description": "Spatial resolution in metres with leading zeros"
+    },
+    "tile_id": {
+      "title": "INSPIRE ETRS89-LAEA Grid",
+      "type": "string",
+      "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+      "description": "Regional LAEA grid tile identifier (2- or 3-digit coordinates)"
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^\\d{5}$",
+      "description": "EPSG code of the product grid"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v\\d{3}$",
+      "description": "Product version"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{variable}_{reference_year}_{resolution}_{tile_id}_{epsg_code}_{version}[.{extension}]",
+  "examples": [
+    "IBU_2018_010m_E47N18_03035_v010.tif",
+    "IBU_2018_010m_E47N19_03035_v010.tif",
+    "IBU_2018_010m_E48N18_03035_v010.tif",
+    "IBU_2018_010m_E49N19_03035_v010.tif",
+    "IBU_2018_010m_E50N19_03035_v010.tif"
+  ]
+}

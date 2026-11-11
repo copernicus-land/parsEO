@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "eumetsat:metop",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "EUMETSAT Metop product filename (extension optional).",
+  "fields": {
+    "platform": {
+      "type": "string",
+      "enum": [
+        "M01",
+        "M02",
+        "M03"
+      ],
+      "description": "Spacecraft unit"
+    },
+    "instrument": {
+      "type": "string",
+      "enum": [
+        "AVHR",
+        "IASI",
+        "ASCAT"
+      ],
+      "description": "Instrument short name"
+    },
+    "processing_level": {
+      "type": "string",
+      "enum": [
+        "L1B",
+        "L2"
+      ],
+      "description": "Processing level"
+    },
+    "start_datetime": {
+      "type": "string",
+      "pattern": "^\\d{8}T\\d{6}Z$",
+      "description": "Acquisition start time (UTC, YYYYMMDDTHHMMSSZ)"
+    },
+    "end_datetime": {
+      "type": "string",
+      "pattern": "^\\d{8}T\\d{6}Z$",
+      "description": "Acquisition end time (UTC, YYYYMMDDTHHMMSSZ)"
+    },
+    "orbit_number": {
+      "type": "string",
+      "pattern": "^O\\d{6}$",
+      "description": "Orbit number"
+    },
+    "collection": {
+      "type": "string",
+      "pattern": "^C\\d{2}$",
+      "description": "Collection identifier"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d{2}$",
+      "description": "Product version"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "nc"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{platform}_{instrument}_{processing_level}_{start_datetime}_{end_datetime}_{orbit_number}_{collection}_V{version}[.{extension}]"
+}

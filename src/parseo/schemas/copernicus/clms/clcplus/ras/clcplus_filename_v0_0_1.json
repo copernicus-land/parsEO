@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:clcplus",
+  "schema_version": "0.0.1",
+  "status": "current",
+  "stac_version": "1.1.0",
+  "description": "CLMS CLC+ raster product filename (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Copernicus Land Monitoring Service programme identifier"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "CLCPLUS"
+      ],
+      "description": "Product family identifier"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "RAS"
+      ],
+      "description": "Data class code (raster)",
+      "stac_map": {
+        "values": {
+          "RAS": {
+            "representation": "raster"
+          }
+        }
+      }
+    },
+    "season": {
+      "type": "string",
+      "pattern": "^(S\\d{4}|C\\d{4}-\\d{4})$",
+      "description": "Reference season and year (SYYYY) or change interval (CYYYY-YYYY)"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^R\\d{2}m$",
+      "description": "Spatial resolution expressed with leading 'R' and units"
+    },
+    "tile_id": {
+      "title": "INSPIRE ETRS89-LAEA Grid",
+      "type": "string",
+      "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+      "description": "Regional LAEA grid tile identifier (2- or 3-digit coordinates)"
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^0?\\d{4}$",
+      "description": "EPSG code of the product grid"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{2}$",
+      "description": "Product version"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^R\\d{2}$",
+      "description": "Product revision"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{product}_{type}_{season}_{resolution}_{tile_id}_{epsg_code}_{version}_{revision}[.{extension}]",
+  "examples": [
+    "CLMS_CLCPLUS_RAS_S2023_R10m_E48N37_03035_V01_R00.tif"
+  ]
+}

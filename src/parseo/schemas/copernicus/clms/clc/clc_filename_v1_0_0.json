@@ -2,14 +2,15 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:clc",
   "schema_version": "1.0.0",
-  "status": "current",
-  "stac_version": "1.1.0",
-  "stac_extensions": ["raster", "eo"],
+  "status": "deprecated",
   "description": "Corine Land Cover product filename (extension optional).",
   "fields": {
     "project": {
       "type": "string",
-      "enum": ["CLC", "U"],
+      "enum": [
+        "CLC",
+        "U"
+      ],
       "description": "Project code"
     },
     "reference_year": {
@@ -27,18 +28,20 @@
       "pattern": "^V\\d{4}$",
       "description": "Product version (e.g., V2020)"
     },
-    "resolution": {
+    "release_number": {
       "type": "string",
-      "pattern": "^[0-9]+[A-Za-z0-9]*$",
-      "description": "Resolution code (e.g., 20, 100, 20u1)"
+      "pattern": "^\\d{2}(?:[A-Za-z]\\d+)?$",
+      "description": "Release identifier (e.g., 20, 20b2, 20u1)."
     },
     "extension": {
       "type": "string",
-      "enum": ["tif"],
+      "enum": [
+        "tif"
+      ],
       "description": "File extension without leading dot"
     }
   },
-  "template": "{project}{reference_year}_{product}_{version}_{resolution}[.{extension}]",
+  "template": "{project}{reference_year}_{product}_{version}_{release_number}[.{extension}]",
   "examples": [
     "CLC2018_CLC2018_V2020_20u1.tif"
   ]

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:egms-l3",
+  "schema_version": "0.0.0",
+  "status": "current",
+  "description": "Copernicus European Ground Motion Service Level 3 velocity grid filename (extension optional).",
+  "fields": {
+    "product": {
+      "type": "string",
+      "enum": [
+        "EGMS"
+      ],
+      "description": "Constant service prefix"
+    },
+    "level": {
+      "type": "string",
+      "pattern": "^L[0-9]+$",
+      "description": "Product processing level"
+    },
+    "tile": {
+      "type": "string",
+      "pattern": "^E\\d{2,3}N\\d{2,3}$",
+      "description": "EGMS 100 km grid tile identifier"
+    },
+    "tile_size": {
+      "type": "string",
+      "pattern": "^\\d{2,3}km$",
+      "description": "Spatial tile size"
+    },
+    "component": {
+      "type": "string",
+      "pattern": "^(?:E|N|U)$",
+      "description": "Displacement component (east, north or up)"
+    },
+    "start_year": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "Start year of the velocity estimation period"
+    },
+    "end_year": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "End year of the velocity estimation period"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+$",
+      "description": "Product version"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif",
+        "tiff"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{product}_{level}_{tile}_{tile_size}_{component}_{start_year}_{end_year}_{version}[.{extension}]",
+  "examples": [
+    "EGMS_L3_E28N49_100km_U_2018_2022_1.tiff",
+    "EGMS_L3_E37N28_100km_U_2019_2023_1.tiff"
+  ]
+}

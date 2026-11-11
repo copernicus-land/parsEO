@@ -360,7 +360,7 @@ def test_iter_asset_filenames_bad_collection(monkeypatch):
 
     monkeypatch.setattr(sd, "_read_json", fake_read_json)
     monkeypatch.setattr(sd, "_list_collections_cached", lambda base_url: ())
-    with pytest.raises(SystemExit) as exc:
+    with pytest.raises(sd.StacClientError) as exc:
         list(sd.iter_asset_filenames("BAD", base_url="http://u"))
     assert (
         str(exc.value)
@@ -375,7 +375,7 @@ def test_sample_collection_filenames_url_error(monkeypatch):
         raise urllib.error.URLError("fail")
 
     monkeypatch.setattr(sd.urllib.request, "urlopen", fake_urlopen)
-    with pytest.raises(SystemExit) as exc:
+    with pytest.raises(sd.StacClientError) as exc:
         sd.sample_collection_filenames("C1", base_url="http://bad")
     assert str(exc.value).startswith(
         "Could not connect to http://bad/collections"

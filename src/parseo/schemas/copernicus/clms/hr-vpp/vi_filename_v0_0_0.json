@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:vi",
+  "schema_version": "0.0.0",
+  "status": "current",
+  "description": "Copernicus Land Monitoring Service Vegetation Index filename schema covering the HR-VPP suite (FAPAR, LAI, NDVI, PPI, FCOVER, DMP).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Programme prefix (Copernicus Land Monitoring Service)"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "VPP"
+      ],
+      "description": "Product family identifier (Vegetation Phenology & Productivity)"
+    },
+    "parameter": {
+      "type": "string",
+      "enum": [
+        "FAPAR",
+        "LAI",
+        "NDVI",
+        "PPI",
+        "FCOVER",
+        "DMP"
+      ],
+      "description": "Biophysical variable encoded in the product"
+    },
+    "resolution": {
+      "type": "string",
+      "enum": [
+        "100m"
+      ],
+      "description": "Spatial resolution of the raster"
+    },
+    "tile_id": {
+      "title": "MGRS",
+      "type": "string",
+      "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+      "description": "MGRS tile identifier (as used by Sentinel-2 products)"
+    },
+    "start_date": {
+      "type": "string",
+      "pattern": "^\\d{8}$",
+      "description": "Start date of the compositing window (YYYYMMDD)"
+    },
+    "end_date": {
+      "type": "string",
+      "pattern": "^\\d{8}$",
+      "description": "End date of the compositing window (YYYYMMDD)"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{3}$",
+      "description": "Product version"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "FAPAR",
+        "LAI",
+        "NDVI",
+        "PPI",
+        "FCOVER",
+        "DMP",
+        "MTD"
+      ],
+      "description": "Filename suffix indicating product content"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif",
+        "xml"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{product}_{parameter}_{resolution}_{tile_id}_{start_date}_{end_date}_{version}_{variable}[.{extension}]",
+  "examples": [
+    "CLMS_VPP_FAPAR_100m_T32TNS_20210101_20210110_V100_FAPAR.tif",
+    "CLMS_VPP_NDVI_100m_T32TNS_20210101_20210110_V100_NDVI.tif"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hr-wsi:wic-comb",
+  "schema_version": "0.0.0",
+  "status": "current",
+  "description": "CLMS HR-WSI Water and Ice Cover combination filename (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "project": {
+      "type": "string",
+      "enum": [
+        "WSI"
+      ],
+      "description": "Project"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "WIC"
+      ],
+      "description": "Product code"
+    },
+    "pixel_spacing": {
+      "type": "string",
+      "enum": [
+        "020m"
+      ],
+      "description": "Pixel spacing"
+    },
+    "tile_id": {
+      "title": "MGRS",
+      "type": "string",
+      "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+      "description": "MGRS tile identifier (as used by Sentinel-2 products)"
+    },
+    "period_start": {
+      "type": "string",
+      "pattern": "^\\d{8}T(?:00|12)0000P12H$",
+      "description": "Aggregation period start"
+    },
+    "combination": {
+      "type": "string",
+      "enum": [
+        "COMB"
+      ],
+      "description": "Combination method"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{3}$",
+      "description": "Product version"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "WIC",
+        "QAFLAGS",
+        "WIC-QA",
+        "MTD"
+      ],
+      "description": "File identifier"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif",
+        "xml"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{project}_{product}_{pixel_spacing}_{tile_id}_{period_start}_{combination}_{version}_{variable}[.{extension}]",
+  "examples": [
+    "CLMS_WSI_WIC_020m_T31TCH_20160720T120000P12H_COMB_V100_WIC-QA.tif"
+  ]
+}

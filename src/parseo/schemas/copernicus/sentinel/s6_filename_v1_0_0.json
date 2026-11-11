@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:sentinel:s6",
+  "schema_version": "1.0.0",
+  "status": "current",
+
+  "description": "Sentinel-6 product filename (P4 altimetry; extension optional).",
+  "fields": {
+    "platform": {"type": "string", "enum": ["S6A", "S6B"]},
+    "instrument": {"type": "string", "enum": ["P4"]},
+    "sampling_rate": {"type": "string", "enum": ["1Hz", "2Hz", "20Hz"]},
+    "mode": {"type": "string", "pattern": "^[A-Z]$"},
+    "start_datetime": {"type": "string", "pattern": "^\\d{8}T\\d{6}$"},
+    "end_datetime": {"type": "string", "pattern": "^\\d{8}T\\d{6}$"},
+    "segment": {"type": "string", "pattern": "^\\d{4}$"},
+    "extension": {"type": "string", "pattern": "^[A-Za-z0-9]+$", "description": "File extension without leading dot"}
+  },
+  "template": "{platform}_{instrument}_{sampling_rate}{mode}_{start_datetime}_{end_datetime}_{segment}[.{extension}]",
+  "examples": [
+    "S6A_P4_20HzN_20221015T103529_20221015T112143_0001.nc",
+    "S6B_P4_1HzN_20230715T103021_20230715T103121_0002"
+  ]
+}

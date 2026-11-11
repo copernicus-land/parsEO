@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hr-wsi:wcd",
+  "schema_version": "0.0.0",
+  "status": "current",
+  "description": "CLMS HR-WSI Water and Coastline Dynamics filename (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "project": {
+      "type": "string",
+      "enum": [
+        "WSI"
+      ],
+      "description": "Project"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "HRWL",
+        "WCD"
+      ],
+      "description": "Product code"
+    },
+    "pixel_spacing": {
+      "type": "string",
+      "enum": [
+        "010m",
+        "100m"
+      ],
+      "description": "Pixel spacing"
+    },
+    "tile_id": {
+      "description": "Regional LAEA grid tile or MGRS tile identifier",
+      "oneOf": [
+        {
+          "title": "INSPIRE ETRS89-LAEA Grid",
+          "type": "string",
+          "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+          "description": "Regional LAEA grid tile identifier (2- or 3-digit coordinates)"
+        },
+        {
+          "title": "MGRS",
+          "type": "string",
+          "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+          "description": "MGRS tile identifier (as used by Sentinel-2 products)"
+        }
+      ]
+    },
+    "period_start": {
+      "type": "string",
+      "pattern": "^\\d{8}P1Y$",
+      "description": "Aggregation period start"
+    },
+    "variant": {
+      "type": "string",
+      "enum": [
+        "COMB"
+      ],
+      "description": "Source mission or combination method"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{3}$",
+      "description": "Product version"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "WCD",
+        "WCD-QA",
+        "MTD"
+      ],
+      "description": "File identifier"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif",
+        "xml"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{project}_{product}_{pixel_spacing}_{tile_id}_{period_start}_{variant}_{version}_{variable}[.{extension}]",
+  "examples": [
+    "CLMS_WSI_WCD_010m_T32TMS_20210101P1Y_COMB_V100_WCD.tif",
+    "CLMS_WSI_HRWL_010m_T31TCH_20160901P1Y_COMB_V100_WCD.tif",
+    "CLMS_WSI_HRWL_100m_E010N20_20160901P1Y_COMB_V100_WCD.tif"
+  ]
+}

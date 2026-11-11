@@ -20,6 +20,11 @@ from urllib.parse import urljoin
 from urllib.parse import urlparse
 import urllib.request
 
+
+class StacClientError(IOError):
+    """Raised when a STAC API request fails."""
+
+
 def _norm_collection_id(collection_id: str, *, base_url: str) -> str:
     """Resolve ``collection_id`` to the official ID from the STAC API."""
 
@@ -40,7 +45,7 @@ def _read_json(url: str) -> dict:
         with urllib.request.urlopen(url) as resp:  # type: ignore[call-arg]
             return json.load(resp)
     except urllib.error.URLError as err:
-        raise SystemExit(f"Could not connect to {url}: {err.reason}") from err
+        raise StacClientError(f"Could not connect to {url}: {err.reason}") from err
 
 
 def list_collections_http(base_url: str, *, deep: bool = False) -> list[str]:
@@ -60,7 +65,7 @@ def list_collections_http(base_url: str, *, deep: bool = False) -> list[str]:
     try:
         data = _read_json(url)
     except urllib.error.HTTPError as err:
-        raise SystemExit(f"HTTP error {err.code} for {err.geturl()}") from err
+        raise StacClientError(f"HTTP error {err.code} for {err.geturl()}") from err
 
     collections = {c["id"] for c in data.get("collections", [])}
 
@@ -79,7 +84,7 @@ def list_collections_http(base_url: str, *, deep: bool = False) -> list[str]:
         try:
             data = _read_json(cur)
         except urllib.error.HTTPError as err:
-            raise SystemExit(f"HTTP error {err.code} for {err.geturl()}") from err
+            raise StacClientError(f"HTTP error {err.code} for {err.geturl()}") from err
 
         # Collect IDs if this document represents a collection or includes
         # embedded collections.
@@ -137,11 +142,11 @@ def iter_asset_filenames(
             data = _read_json(url)
         except urllib.error.HTTPError as err:
             if first_request and err.code == 404:
-                raise SystemExit(
+                raise StacClientError(
                     f"Collection '{collection_id}' not found at {base}. "
                     "Use `parseo stac-sample <collection> --stac-url <url>` with a valid collection ID."
                 ) from err
-            raise SystemExit(f"HTTP error {err.code} for {err.geturl()}") from err
+            raise StacClientError(f"HTTP error {err.code} for {err.geturl()}") from err
         first_request = False
         for feat in data.get("features", []):
             props = feat.get("properties", {})
@@ -210,11 +215,11 @@ def iter_collection_tree(
         data = _read_json(url)
     except urllib.error.HTTPError as err:
         if err.code == 404:
-            raise SystemExit(
+            raise StacClientError(
                 f"Collection '{collection_id}' not found at {base}. "
                 "Use `parseo stac-sample <collection> --stac-url <url>` with a valid collection ID."
             ) from err
-        raise SystemExit(f"HTTP error {err.code} for {err.geturl()}") from err
+        raise StacClientError(f"HTTP error {err.code} for {err.geturl()}") from err
 
     children = [
         link.get("href", "").rstrip("/").split("/")[-1]

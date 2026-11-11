@@ -4,14 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "parseo"
-version = "0.3.1"  # or remove this and use setuptools-scm below
+version = "0.4.4"  # or remove this and use setuptools-scm below
 description = "Filename parser/assembler for satellite data"
 readme = "README.md"
 license = { text = "EUPL-1.2" }
 requires-python = ">=3.9"
-dependencies = [
-  "jsonschema>=4,<5"
-]
+dependencies = []
 authors = [{ name = "Matteo Mattiuzzi", email = "matteo@mattiuzzi.com" }]
 keywords = ["satellite", "remote-sensing", "filenames", "sentinel", "parsing"]
 classifiers = [
@@ -28,10 +26,10 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/your-org/parseo"
-Repository = "https://github.com/your-org/parseo.git"
-Issues = "https://github.com/your-org/parseo/issues"
-Changelog = "https://github.com/your-org/parseo/releases"
+Homepage = "https://github.com/copernicus-land/parsEO"
+Repository = "https://github.com/copernicus-land/parsEO.git"
+Issues = "https://github.com/copernicus-land/parsEO/issues"
+Changelog = "https://github.com/copernicus-land/parsEO/releases"
 
 [project.scripts]
 parseo = "parseo.cli:main"

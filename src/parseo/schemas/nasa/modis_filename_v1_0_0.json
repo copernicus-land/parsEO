@@ -1,0 +1,54 @@
+{
+  "schema_id": "nasa:modis",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "stac_version": "1.1.0",
+
+  "description": "MODIS product filename (extension optional).",
+  "fields": {
+    "platform": {
+      "type": "string",
+      "enum": ["MOD","MYD","MCD"],
+      "description": "Spacecraft platform (MOD=Terra, MYD=Aqua, MCD=Combined)",
+      "stac_map": {
+        "MOD": {
+          "platform": "Terra",
+          "instruments": ["MODIS"]
+        },
+        "MYD": {
+          "platform": "Aqua",
+          "instruments": ["MODIS"]
+        },
+        "MCD": {
+          "platform": "Combined",
+          "instruments": ["MODIS"]
+        }
+      }
+    },
+    "product": {
+      "type": "string",
+      "pattern": "^\\d{2}$",
+      "description": "Two-digit product code (e.g., '09' for Surface Reflectance)"
+    },
+    "variant": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]+$",
+      "description": "Product variant or sub-type (e.g., GA, A1)"
+    },
+    "acq_date": {"type": "string", "pattern": "^\\d{7}$", "description": "Acquisition date (YYYYDDD)"},
+    "tile_id": {"type": "string", "pattern": "^h\\d{2}v\\d{2}$", "description": "MODIS sinusoidal tile"},
+    "collection": {"type": "string", "pattern": "^\\d{3}$", "description": "Collection number"},
+    "proc_date": {"type": "string", "pattern": "^\\d{13}$", "description": "Production date (YYYYDDDHHMMSS)"},
+    "extension": {"type": "string", "pattern": "^[A-Za-z0-9]+$", "description": "File extension."}
+  },
+  "template": "{platform}{product}{variant}.A{acq_date}.{tile_id}.{collection}.{proc_date}[.{extension}]",
+  "examples": [
+    "MOD09GA.A2021123.h18v04.006.2021132234506.hdf",
+    "MYD11A1.A2021001.h21v09.061.2021015190034"
+  ],
+  "counter_examples": [
+    "MOD09GA.X2021123.h18v04.006.2021132234506.hdf",
+    "MOD09GA.A2021123.H18V04.006.2021132234506.hdf"
+  ]
+}

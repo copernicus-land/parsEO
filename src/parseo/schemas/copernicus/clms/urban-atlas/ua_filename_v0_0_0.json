@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:ua-lcu",
+  "schema_version": "0.0.0",
+  "status": "current",
+  "stac_version": "1.1.0",
+  "description": "Copernicus Urban Atlas filename schema covering status and change layers (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "UA"
+      ],
+      "description": "Product code (Urban Atlas)"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "LCU",
+        "LCUC",
+        "BBH",
+        "GUA"
+      ],
+      "description": "Urban Atlas sub-theme identifier"
+    },
+    "survey": {
+      "type": "string",
+      "pattern": "^(?:S\\d{4}|C\\d{4}-\\d{4})$",
+      "description": "Temporal coverage token (e.g., S2021 or C2018-2021)"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "V",
+        "R"
+      ],
+      "description": "Data type raster or vector",
+      "stac_map": {
+        "values": {
+          "V": {
+            "representation": "vector"
+          },
+          "R": {
+            "representation": "raster"
+          }
+        }
+      }
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^(\\d{3}ha|\\d{2}m)$",
+      "description": "Spatial resolution or minimum mapping unit"
+    },
+    "area_code": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}\\d{3}L[A-Za-z0-9]$",
+      "description": "Functional urban area (FUA) code"
+    },
+    "city": {
+      "type": "string",
+      "pattern": "^[\\w-]+$",
+      "description": "City or metropolitan area identifier (letters, digits and hyphen)"
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^\\d{4,5}$",
+      "description": "Projected coordinate reference system expressed as a zero-padded EPSG code"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{2}$",
+      "description": "Product version"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^R\\d{2}$",
+      "description": "Revision identifier"
+    },
+    "production_date": {
+      "type": "string",
+      "pattern": "^\\d{8}$",
+      "description": "Production date (YYYYMMDD)"
+    },
+    "extension": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]+(?:\\.[A-Za-z0-9]+)?$",
+      "description": "Optional file extension without leading dot (allows compound extensions such as gpkg.zip)"
+    }
+  },
+  "template": "{programme}_{product}_{variable}_{survey}_{type}{resolution}_{area_code}_{city}_{epsg_code}_{version}_{revision}_{production_date}[.{extension}]",
+  "examples": [
+    "CLMS_UA_LCU_S2021_V025ha_DK004L3_AALBORG_03035_V01_R00_20240212",
+    "CLMS_UA_LCU_S2018_V025ha_DK004L3_AALBORG_03035_V02_R01_20240212",
+    "CLMS_UA_LCUC_C2018-2021_V025ha_DK004L3_AALBORG_03035_V01_R04_20240212",
+    "CLMS_UA_BBH_S2021_R10m_DK004L3_AALBORG_03035_V01_R00_20240212",
+    "CLMS_UA_GUA_S2021_V025ha_DK004L3_AALBORG_03035_V01_R11_20240212"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hr-wsi:fsc",
+  "schema_version": "0.0.0",
+  "status": "current",
+  "description": "CLMS HR-WSI Fractional Snow Cover product filename (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "project": {
+      "type": "string",
+      "enum": [
+        "WSI"
+      ],
+      "description": "Project"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "FSC"
+      ],
+      "description": "Product code"
+    },
+    "pixel_spacing": {
+      "type": "string",
+      "enum": [
+        "020m"
+      ],
+      "description": "Pixel spacing"
+    },
+    "tile_id": {
+      "title": "MGRS",
+      "type": "string",
+      "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+      "description": "MGRS tile identifier (as used by Sentinel-2 products)"
+    },
+    "sensing_datetime": {
+      "type": "string",
+      "pattern": "^\\d{8}T\\d{6}$",
+      "description": "Acquisition datetime (UTC)"
+    },
+    "platform": {
+      "type": "string",
+      "enum": [
+        "S2A",
+        "S2B",
+        "S2C"
+      ],
+      "description": "Satellite platform"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{3}$",
+      "description": "Product version"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "CLD",
+        "FSCOG",
+        "FSCOG-QA",
+        "FSCTOC",
+        "FSCTOC-QA",
+        "MTD",
+        "NDSI",
+        "QAFLAGS"
+      ],
+      "description": "File identifier"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif",
+        "xml"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{project}_{product}_{pixel_spacing}_{tile_id}_{sensing_datetime}_{platform}_{version}_{variable}[.{extension}]",
+  "examples": [
+    "CLMS_WSI_FSC_020m_T32TNS_20211018T103021_S2A_V100_FSCOG.tif"
+  ]
+}

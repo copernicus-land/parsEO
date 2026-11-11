@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hr-vpp:st",
+  "schema_version": "0.0.0",
+  "status": "current",
+  "description": "CLMS HR-VPP Seasonal Trajectories Plant Phenology Index product filename (extension optional).",
+  "fields": {
+    "product": {
+      "type": "string",
+      "enum": [
+        "ST"
+      ],
+      "description": "Constant prefix"
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^\\d{8}T\\d{6}$",
+      "description": "Acquisition timestamp (YYYYMMDDTHHMMSS)"
+    },
+    "sensor": {
+      "type": "string",
+      "enum": [
+        "S2"
+      ],
+      "description": "Sensor platform"
+    },
+    "tile_id": {
+      "description": "Regional LAEA grid tile or MGRS tile identifier",
+      "oneOf": [
+        {
+          "title": "INSPIRE ETRS89-LAEA Grid",
+          "type": "string",
+          "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+          "description": "Regional LAEA grid tile identifier (2- or 3-digit coordinates)"
+        },
+        {
+          "title": "MGRS",
+          "type": "string",
+          "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+          "description": "MGRS tile identifier (as used by Sentinel-2 products)"
+        }
+      ]
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^\\d{4,5}$",
+      "description": "EPSG code of the product grid (unpadded values are zero-filled on output)"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^\\d{3}m$",
+      "description": "Spatial resolution"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{3}$",
+      "description": "Product version"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "PPI",
+        "QFLAG"
+      ],
+      "description": "Product code"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{product}_{timestamp}_{sensor}_{tile_id}[-{epsg_code}]-{resolution}_{version}_{variable}[.{extension}]",
+  "examples": [
+    "ST_20170101T000000_S2_E10N25-03035-010m_V101_PPI.tif",
+    "ST_20170101T000000_S2_E10N25-03035-010m_V101_QFLAG.tif",
+    "ST_20170101T000000_S2_T20PPB-010m_V101_PPI.tif",
+    "ST_20170101T000000_S2_T20PPB-010m_V101_QFLAG.tif"
+  ]
+}

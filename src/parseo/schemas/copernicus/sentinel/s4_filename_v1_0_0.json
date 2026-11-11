@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:sentinel:s4",
+  "schema_version": "1.0.0",
+  "status": "current",
+
+  "description": "Sentinel-4 product filename (UVN; optional tile, extension).",
+  "fields": {
+    "platform": {"type": "string", "enum": ["S4A", "S4B"]},
+    "instrument": {"type": "string", "enum": ["UVN"]},
+    "processing_level": {"type": "string", "enum": ["L1", "L2"]},
+    "sensing_datetime": {"type": "string", "pattern": "^\\d{8}T\\d{6}$"},
+    "tile": {"type": "string", "pattern": "^[A-Z0-9_\\-]{3,10}$"},
+    "extension": {"type": "string", "pattern": "^[A-Za-z0-9]+$", "description": "File extension without leading dot"}
+  },
+  "template": "{platform}_{instrument}_{processing_level}_{sensing_datetime}[_{tile}][.{extension}]",
+  "examples": [
+    "S4A_UVN_L2_20250105T103021_EUROPE.tif",
+    "S4B_UVN_L1_20240701T101010.nc"
+  ]
+}

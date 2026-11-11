@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "template:example:product",
+  "schema_version": "0.0.1",
+  "status": "current",
+  "stac_version": "1.1.0",
+  "stac_extensions": [],
+  "description": "Skeleton filename schema. Replace placeholders with product-specific details.",
+  "fields": {
+    "prefix": {
+      "type": "string",
+      "pattern": "^(MOD|MYD|MCD)$",
+      "description": "Use stac_map to translate combinted name fields from/into STAC fields",
+      "stac_map": {
+        "MOD": {
+          "platform": "Terra",
+          "instrument": "MODIS"
+        },
+        "MYD": {
+          "platform": "Aqua",
+          "instrument": "MODIS"
+        },
+        "MCD": {
+          "platform": "Combined",
+          "instrument": "MODIS"
+        }
+      }
+    },
+    "product": {
+      "type": "string",
+      "pattern": "^XYZ$",
+      "description": "Product code or identifier"
+    },
+    "sensing_datetime": {
+      "type": "string",
+      "pattern": "^\\d{8}T\\d{6}$",
+      "description": "Acquisition datetime (UTC, YYYYMMDDTHHMMSS)"
+    },    
+    "epsg": {
+      "type": "string",
+      "pattern": "^\\d{5}$",
+      "description": "EPSG code of the product grid"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{3}$",
+      "description": "Processing baseline or version"
+    },
+    "extension": {
+      "type": "string",
+      "enum": ["tif"],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{prefix}_{product}_{sensing_datetime}_{version}[.{extension}]",
+  "examples": [
+    "PRD_XYZ_20240101T000000_3035_V100.tif"
+  ]
+}

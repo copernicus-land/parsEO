@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:pa",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "stac_version": "1.1.0",
+  "description": "Copernicus Protected areas filename schema covering status layer (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "PA"
+      ],
+      "description": "Product code (Protected Areas)"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "LCUC"
+      ],
+      "description": "Protected Areas sub-theme identifier"
+    },
+    "survey": {
+      "type": "string",
+      "pattern": "^(?:S\\d{4})$",
+      "description": "Temporal coverage token (e.g., S2021)"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "V"
+      ],
+      "description": "Data type:vector",
+      "stac_map": {
+        "values": {
+          "V": {
+            "representation": "vector"
+          }
+        }
+      }
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^(\\d{2}HA)$",
+      "description": "Minimum mapping unit"
+    },
+    "area_code": {
+      "type": "string",
+      "pattern": "^DU\\d{4}$",
+      "description": "Delivery unit (bioregion) code"
+    },
+    "area_name": {
+      "type": "string",
+      "pattern": "^[A-Z]+$",
+      "description": "Area name identifier (letters)"
+    },
+    "spatial_coverage": {
+      "type": "string",
+      "pattern": "^(EU27)$",
+      "description": "Spatial coverage identifier of the full dataset (e.g, EU27)"
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^\\d{4,5}$",
+      "description": "Projected coordinate reference system expressed as a zero-padded EPSG code"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d{2}$",
+      "description": "Product version"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^R\\d{2}$",
+      "description": "Revision identifier"
+    },
+    "production_date": {
+      "type": "string",
+      "pattern": "^\\d{8}$",
+      "description": "Production date (YYYYMMDD)"
+    },
+    "extension": {
+      "type": "string",
+      "pattern": "^(gpkg|gdb|fgb|parquet)$",
+      "description": "Optional file extension without leading dot (allows compound extensions such as gpkg)"
+    }
+  },
+  "template": "{programme}_{product}_{variable}_{survey}_{area_code}_{area_name}_{type}{resolution}_{spatial_coverage}_{epsg_code}_{version}_{revision}_{production_date}[.{extension}]",
+  "examples": [
+    "CLMS_PA_LCUC_S2021_DU0014_BLACKSEA_V05HA_EU27_03035_V01_R01_20260211"
+  ]
+}

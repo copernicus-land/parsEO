@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:clc",
+  "schema_version": "1.1.0",
+  "status": "current",
+
+  "description": "Corine Land Cover filename (status and change layers, extension optional).",
+  "fields": {
+    "update_campaign": {
+      "type": "string",
+      "pattern": "^U\\d{4}$",
+      "description": "Year of the CLC update campaign (YYYY)."
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "CLC",
+        "CHA"
+      ],
+      "description": "Layer theme: CLC for status layers, CHA for change layers."
+    },
+    "reference_code": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "Reference year (status) or two-year span code (change)."
+    },
+    "change_component": {
+      "type": "string",
+      "pattern": "^(?:12|18)$",
+      "description": "Change raster component: 12 for consumption, 18 for formation."
+    },
+    "release_year": {
+      "type": "string",
+      "pattern": "^V\\d{4}$",
+      "description": "Year of data release (YYYY)."
+    },
+    "release_number": {
+      "type": "string",
+      "pattern": "^\\d{2}(?:[A-Za-z]\\d+)?$",
+      "description": "Release identifier (e.g., 20, 20b2, 20u1)."
+    },
+    "country_code": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$",
+      "description": "ISO 3166-1 alpha-2 country code for overseas deliveries."
+    },
+    "dom_code": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "DOM (overseas department) code used with country_code."
+    },
+    "extension": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]+$",
+      "description": "File extension without leading dot."
+    }
+  },
+  "template": "{update_campaign}_{product}{reference_code}[_{change_component}]_{release_year}_{release_number}[_{country_code}_{dom_code}][.{extension}]",
+  "examples": [
+    "U2006_CLC2000_V2018_20b2.zip",
+    "U2018_CHA1218_V2020_20u1.tif",
+    "U2018_CHA1218_12_V2020_20u1.tif",
+    "U2006_CLC2000_V2018_20b2_FR_GLP.zip"
+  ]
+}
