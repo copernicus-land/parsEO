@@ -101,8 +101,26 @@ def test_assemble_clms_hrl_imperviousness():
         "extension": "tif",
     }
 
-    name = assemble(fields, family="IMPERVIOUSNESS")
+    name = assemble(fields, family="IMPERVIOUSNESS", version="0.0.0")
     assert name == "IMD_2021_E042N018_010m_V100.tif"
+
+
+def test_assemble_clms_hrl_imperviousness_current():
+    fields = {
+        "programme": "CLMS",
+        "product": "HRL",
+        "variable": "IMP",
+        "temporal_coverage": "S2021",
+        "type": "R",
+        "resolution": "10m",
+        "tile_id": "E27N48",
+        "epsg_code": "3035",
+        "version_revision": "V01-R00",
+        "extension": "tif",
+    }
+
+    name = assemble(fields, family="IMPERVIOUSNESS")
+    assert name == "CLMS_HRL-IMP_S2021_R10m_E27N48_3035_V01-R00.tif"
 
 
 def test_assemble_clms_n2k():
@@ -242,4 +260,3 @@ def test_assemble_clms_hr_vpp_from_tile_id():
 
     name = assemble(fields, family="VPP")
     assert name == "VPP_2017_S2_E45N28-03035-010m_V101_s1_EOSD.tif"
-
