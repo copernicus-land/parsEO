@@ -1,7 +1,6 @@
 # src/parseo/assembler.py
 from __future__ import annotations
 
-from functools import lru_cache
 from importlib.resources import as_file
 from importlib.resources import files
 from pathlib import Path
@@ -17,7 +16,6 @@ from .schema_registry import _load_json_from_path
 from .schema_registry import get_schema_path
 from .schema_registry import SCHEMAS_ROOT
 from .template import _field_regex
-from .template import compile_template
 
 
 def clear_schema_cache() -> None:
