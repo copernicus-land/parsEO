@@ -81,9 +81,9 @@
   },
   "template": "{prefix}_{theme}_{variable}_{temporal_coverage}_{resolution}_{tile_id}_{epsg_code}_{version}_{release}[.{extension}]",
   "examples": [
-    "CLMS_VLCC_IMCCS_C2018-2021_R20m_E09N27_03035_V01_R01.tif",
-    "CLMS_NVLCC_IMD_S2021_R10m_E09N27_03035_V01_R01.tif",
-    "CLMS_NVLCC_IBUC_C2018-2021_R20m_E37N28_03035_V01_R02.tif",
-    "CLMS_NVLCC_SBCC_C2018-2021_R100m_E37N28_03035_V01_R02.tif"
+    "CLMS_HRLNVLCC_IMCCS_C2018-2021_R20m_E09N27_03035_V01_R01.tif",
+    "CLMS_HRLNVLCC_IMD_S2021_R10m_E09N27_03035_V01_R01.tif",
+    "CLMS_HRLNVLCC_IBUC_C2018-2021_R20m_E37N28_03035_V01_R02.tif",
+    "CLMS_HRLNVLCC_SBCC_C2018-2021_R100m_E37N28_03035_V01_R02.tif"
   ]
 }
