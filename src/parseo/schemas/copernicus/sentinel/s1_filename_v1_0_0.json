@@ -48,12 +48,12 @@
     },
     "abs_orbit": {
       "type": "string",
-      "pattern": "^A\\d{6}$",
+      "pattern": "^A?\\d{6}$",
       "description": "Absolute orbit number"
     },
     "datatake": {
       "type": "string",
-      "pattern": "^D[0-9A-F]{6}$",
+      "pattern": "^D?[0-9A-F]{6}$",
       "description": "Datatake ID"
     },
     "product_id": {
@@ -61,18 +61,24 @@
       "pattern": "^[0-9A-F]{4,12}$",
       "description": "Unique product ID"
     },
+    "cog":{
+      "type": "string",
+      "enum": ["COG"],
+      "description": "COG extension without leading hyphen"
+    },
     "extension": {
       "type": "string",
       "enum": ["SAFE"],
       "description": "File extension without leading dot"
     }
   },
-  "template": "{platform}_{instrument_mode}_{product_type}_{processing_level}{product_class}{polarization}_{start_datetime}_{end_datetime}_{abs_orbit}_{datatake}_{product_id}[.{extension}]",
+  "template": "{platform}_{instrument_mode}_{product_type}_{processing_level}{product_class}{polarization}_{start_datetime}_{end_datetime}_{abs_orbit}_{datatake}_{product_id}[_{cog}][.{extension}]",
   "examples": [
     "S1A_IW_SLC__1SDV_20250105T053021_20250105T053048_A054321_D068F2E_ABC123.SAFE",
     "S1B_EW_GRDH_1SDH_20190101T000000_20190101T000030_A012345_D0ABCDE_ABCDEF",
     "S1C_SM_OCN__1SSV_20240701T101010_20240701T101111_A123456_D1A2B3C_1A2B3C.SAFE",
     "S1A_EW_RAW__0SDV_20230601T123456_20230601T123546_A210987_D0ABCDE_123ABC.SAFE",
-    "S1B_SM_GRDE_1SDV_20190315T120000_20190315T120030_A654321_D0FEDCB_DEF123"
+    "S1B_SM_GRDE_1SDV_20190315T120000_20190315T120030_A654321_D0FEDCB_DEF123",
+    "S1C_IW_GRDH_1SDH_20250624T095150_20250624T095215_002923_005F96_9FA1_COG.SAFE"
   ]
 }
