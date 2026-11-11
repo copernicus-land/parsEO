@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:hrl:vlcc",
   "schema_version": "0.0.0",
-  "status": "current",
+  "status": "deprecated",
   "description": "CLMS High Resolution Layer Vegetated Land Cover Characteristics product filename (extension optional).",
   "fields": {
     "programme": {

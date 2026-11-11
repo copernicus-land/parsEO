@@ -180,6 +180,7 @@ def _attempt_parse(
     """Attempt to parse *name* once and return result with diagnostics."""
 
     near_miss: Optional[ParseError] = None
+    near_miss_prefix = -1
     first_error: Optional[Exception] = None
 
     hinted_meta = info.get(product_hint) if product_hint else None
@@ -211,6 +212,9 @@ def _attempt_parse(
                     value,
                     schema_id=schema.get("schema_id"),
                     match_family=display_family,
+                )
+                near_miss_prefix = _matching_prefix_length(
+                    name, schema, field, ignore_case=ignore_case
                 )
         except ParseError as err:
             near_miss = err
@@ -256,10 +260,13 @@ def _attempt_parse(
                 None,
                 None,
             )
-        if near_miss is None:
-            mismatch = _explain_match_failure(name, schema, ignore_case=ignore_case)
-            if mismatch:
-                field, expected, value = mismatch
+        mismatch = _explain_match_failure(name, schema, ignore_case=ignore_case)
+        if mismatch:
+            field, expected, value = mismatch
+            prefix_length = _matching_prefix_length(
+                name, schema, field, ignore_case=ignore_case
+            )
+            if prefix_length > near_miss_prefix:
                 canonical_family = _family_from_path(p, info)
                 display_family = to_display_family(canonical_family or product_hint)
                 near_miss = ParseError(
@@ -269,6 +276,7 @@ def _attempt_parse(
                     schema_id=schema.get("schema_id"),
                     match_family=display_family,
                 )
+                near_miss_prefix = prefix_length
 
     return None, near_miss, first_error
 
@@ -447,6 +455,20 @@ def _balanced_slice(pattern: str, end: int) -> str:
         break
 
     return pattern[:j]
+
+
+def _matching_prefix_length(
+    name: str, schema: Dict, field: str, ignore_case: bool = False
+) -> int:
+    pattern = _pattern_from_schema(schema)
+    if not pattern:
+        return 0
+    spans = _named_group_spans(pattern)
+    if field not in spans:
+        return 0
+    prefix = _balanced_prefix(pattern, spans[field][0])
+    match = _compile_pattern(prefix, ignore_case=ignore_case).match(name)
+    return match.end() if match else 0
 
 
 def _explain_match_failure(name: str, schema: Dict, ignore_case: bool = False) -> Optional[tuple[str, str, str]]:
@@ -780,4 +802,3 @@ def validate_schema(
                     )
     if verbose:
         print(f"Validated {validated} examples")
-

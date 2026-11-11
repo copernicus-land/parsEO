@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:egms-gnss-model",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "Copernicus European Ground Motion Service GNSS model filename.",
+  "fields": {
+    "product": {
+      "type": "string",
+      "enum": [
+        "EGMS"
+      ],
+      "description": "Constant service prefix"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "AEPND"
+      ],
+      "description": "Product identifier"
+    },
+    "issue_year": {
+      "type": "string",
+      "pattern": "^V\\d{4}$",
+      "description": "Year of issue"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "csv"
+      ],
+      "description": "File extension without leading dot"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^\\d$",
+      "description": "Revision within the year (0 pre-release, 1 first full release)"
+    }
+  },
+  "template": "{product}_{variable}_{issue_year}.{revision}.{extension}",
+  "examples": [
+    "EGMS_AEPND_V2020.0.csv",
+    "EGMS_AEPND_V2023.1.csv"
+  ]
+}

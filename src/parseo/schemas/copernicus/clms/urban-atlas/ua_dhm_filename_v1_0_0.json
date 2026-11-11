@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:ua-dhm",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "Copernicus Urban Atlas Digital Height Model filename per the CLMS Filenaming Framework (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "UA"
+      ],
+      "description": "Product code"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "DHM"
+      ],
+      "description": "Digital Height Model"
+    },
+    "survey": {
+      "type": "string",
+      "pattern": "^(?:S\\d{4}|C\\d{4}-\\d{4})$",
+      "description": "Temporal coverage token"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "R"
+      ],
+      "description": "Data type raster"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^\\d{1,3}m$",
+      "description": "Spatial resolution"
+    },
+    "area_code": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}\\d{3}L[A-Za-z0-9]$",
+      "description": "Functional urban area (FUA) code"
+    },
+    "city": {
+      "type": "string",
+      "pattern": "^[\\w-]+$",
+      "description": "City or metropolitan area identifier (letters, digits and hyphen)"
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "Bare EPSG code, no zero-padding (e.g., 3035)"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Hyphenated version and revision"
+    },
+    "production_date": {
+      "type": "string",
+      "pattern": "^\\d{8}$",
+      "description": "Production date (YYYYMMDD)"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "shp"
+      ],
+      "description": "Optional file extension without leading dot"
+    }
+  },
+  "template": "{programme}_{product}-{variable}_{survey}_{type}{resolution}_{area_code}_{city}_{epsg_code}_{version_revision}_{production_date}[.{extension}]",
+  "examples": [
+    "CLMS_UA-DHM_S2021_R10m_DK004L3_AALBORG_3035_V01-R00_20240212"
+  ]
+}

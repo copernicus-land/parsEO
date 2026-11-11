@@ -8,6 +8,7 @@ from parseo import (
     assemble_auto,
     clear_schema_cache,
     list_schema_versions,
+    parse_auto,
 )
 
 
@@ -101,8 +102,26 @@ def test_assemble_clms_hrl_imperviousness():
         "extension": "tif",
     }
 
-    name = assemble(fields, family="IMPERVIOUSNESS")
+    name = assemble(fields, family="IMPERVIOUSNESS", version="0.0.0")
     assert name == "IMD_2021_E042N018_010m_V100.tif"
+
+
+def test_assemble_clms_hrl_imperviousness_current():
+    fields = {
+        "programme": "CLMS",
+        "product": "HRL",
+        "variable": "IMP",
+        "temporal_coverage": "S2021",
+        "type": "R",
+        "resolution": "10m",
+        "tile_id": "E27N48",
+        "epsg_code": "3035",
+        "version_revision": "V01-R00",
+        "extension": "tif",
+    }
+
+    name = assemble(fields, family="IMPERVIOUSNESS")
+    assert name == "CLMS_HRL-IMP_S2021_R10m_E27N48_3035_V01-R00.tif"
 
 
 def test_assemble_clms_n2k():
@@ -134,8 +153,24 @@ def test_assemble_clms_urban_atlas_with_canonical_type():
         "production_date": "20240212",
     }
 
-    name = assemble(fields, family="UA-LCU")
+    name = assemble(fields, family="UA-LCU", version="0.0.0")
     assert name == "CLMS_UA_LCU_S2021_V025ha_DK004L3_AALBORG_03035_V01_R00_20240212"
+
+
+def test_assemble_current_urban_atlas_from_parsed_fields():
+    filename = "CLMS_UA-LCU_S2021_V025ha_DK004L3_AALBORG_3035_V01-R00_20240212"
+    result = parse_auto(filename)
+
+    assert result.fields["epsg_code"] == "03035"
+    assert assemble(result.fields, family="UA-LCU") == filename
+    assert result.fields["epsg_code"] == "03035"
+
+    fields = dict(result.fields, epsg_code="3035")
+    assert assemble(fields, family="UA-LCU") == filename
+
+    fields["epsg_code"] = "13035"
+    with pytest.raises(ValueError, match="epsg_code"):
+        assemble(fields, family="UA-LCU")
 
 
 def test_assemble_clms_clcplus_with_canonical_type():
@@ -220,7 +255,7 @@ def test_assemble_clms_hr_vpp_from_tile_id_mgrs():
         "extension": "tif",
     }
 
-    name = assemble(fields, family="VPP")
+    name = assemble(fields, family="VPP", version="0.0.0")
     assert name == "VPP_2017_S2_T32TPR-010m_V101_s1_AMPL.tif"
 
 
@@ -240,6 +275,5 @@ def test_assemble_clms_hr_vpp_from_tile_id():
         "extension": "tif",
     }
 
-    name = assemble(fields, family="VPP")
+    name = assemble(fields, family="VPP", version="0.0.0")
     assert name == "VPP_2017_S2_E45N28-03035-010m_V101_s1_EOSD.tif"
-

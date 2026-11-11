@@ -37,7 +37,8 @@
     "type": {
       "type": "string",
       "enum": [
-        "R","V"
+        "R",
+        "V"
       ],
       "description": "Data type:vector or raster",
       "stac_map": {

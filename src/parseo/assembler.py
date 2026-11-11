@@ -85,15 +85,29 @@ def _assemble_schema(schema_path: Union[str, Path], fields: Dict[str, Any]) -> s
         raise ValueError(f"Schema {schema_path} missing 'template' string.")
 
     epsg_value = prepared_fields.get("epsg_code")
+    specs = sch.get("fields", {})
     if (
         isinstance(epsg_value, str)
         and "EPSG{epsg_code}" in template
         and epsg_value
     ):
         prepared_fields["epsg_code"] = epsg_value.lstrip("0") or "0"
+    elif (
+        isinstance(epsg_value, str)
+        and len(epsg_value) == 5
+        and epsg_value.startswith("0")
+        and epsg_value.isascii()
+        and epsg_value.isdigit()
+    ):
+        epsg_spec = specs.get("epsg_code", {})
+        if "pattern" in epsg_spec:
+            epsg_pattern = re.compile(f"^{_field_regex(epsg_spec)}$")
+            unpadded = epsg_value[1:]
+            if not epsg_pattern.fullmatch(epsg_value) and epsg_pattern.fullmatch(unpadded):
+                prepared_fields = dict(prepared_fields)
+                prepared_fields["epsg_code"] = unpadded
 
     # Validate provided fields against schema definitions
-    specs = sch.get("fields", {})
     for name, value in prepared_fields.items():
         spec = specs.get(name)
         if not spec:

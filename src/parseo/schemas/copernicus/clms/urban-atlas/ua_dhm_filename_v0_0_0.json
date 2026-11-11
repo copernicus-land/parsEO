@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:ua-dhm",
   "schema_version": "0.0.0",
-  "status": "current",
+  "status": "deprecated",
   "description": "Copernicus Urban Atlas 2021 Digital Height Model (DHM) vector filename schema.",
   "fields": {
     "area_code": {

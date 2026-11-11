@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hr-wsi:sp",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "CLMS HR-WSI Snow Phenology product filename per the CLMS Filenaming Framework (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "project": {
+      "type": "string",
+      "enum": [
+        "WSI"
+      ],
+      "description": "Project code"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "SP"
+      ],
+      "description": "Product code (Snow Phenology)"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "SCD",
+        "SCO",
+        "SCM",
+        "NOBS",
+        "NCSO",
+        "NWSO",
+        "QAFLAGS",
+        "SCD-QA",
+        "SCO-QA",
+        "SCM-QA",
+        "MTD"
+      ],
+      "description": "Sub-variable hyphen-appended to the product code compound"
+    },
+    "temporal_coverage": {
+      "type": "string",
+      "pattern": "^A\\d{8}P1Y$",
+      "description": "Aggregated temporal coverage with semantic 'A' prefix (ISO 8601 duration)"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^R\\d{1,3}m$",
+      "description": "Spatial resolution, no zero-padding"
+    },
+    "tile_id": {
+      "description": "Regional LAEA grid tile or MGRS tile identifier",
+      "oneOf": [
+        {
+          "title": "INSPIRE ETRS89-LAEA Grid",
+          "type": "string",
+          "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+          "description": "Regional LAEA grid tile identifier (2- or 3-digit coordinates)"
+        },
+        {
+          "title": "MGRS",
+          "type": "string",
+          "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+          "description": "MGRS tile identifier (as used by Sentinel-2 products)"
+        }
+      ]
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Single hyphenated version+revision token (R = Revision, not Release)"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif",
+        "xml"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{project}-{product}-{variable}_{temporal_coverage}_{resolution}_{tile_id}_{version_revision}[.{extension}]",
+  "examples": [
+    "CLMS_WSI-SP-SCD_A20200901P1Y_R20m_T38TKL_V01-R00.tif",
+    "CLMS_WSI-SP-SCD-QA_A20200901P1Y_R60m_T38TKL_V01-R00.tif"
+  ],
+  "counter_examples": [
+    "CLMS_WSI_SP_020m_T38TKL_20200901P1Y_S2_V100_SCD.tif",
+    "CLMS_WSI-SP-SCD_A20200901P1Y_R20m_T38TKL_03035_V01-R00.tif"
+  ]
+}

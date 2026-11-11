@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hrl:nvlcc",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "CLMS Non-Vegetated Land Cover Characteristics product filename per the CLMS Filenaming Framework (extension optional).",
+  "fields": {
+    "prefix": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "theme": {
+      "type": "string",
+      "enum": [
+        "NVLCC"
+      ],
+      "description": "Product code (HR prefix dropped per CLMS Framework convention)"
+    },
+    "variable": {
+      "type": "string",
+      "pattern": "^[A-Z]{3,5}$",
+      "description": "Layer code hyphen-appended to the product code (e.g., IMCCS, IMD, IBUC, SBCC)"
+    },
+    "temporal_coverage": {
+      "type": "string",
+      "pattern": "^(?:C\\d{4}-\\d{4}|S\\d{4})$",
+      "description": "Temporal coverage token where CYYYY-YYYY captures change layers and SYYYY captures status layers"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^R\\d{1,3}m$",
+      "description": "Spatial resolution, no zero-padding"
+    },
+    "tile_id": {
+      "title": "INSPIRE ETRS89-LAEA Grid",
+      "type": "string",
+      "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+      "description": "Regional LAEA grid tile identifier (2- or 3-digit coordinates)"
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "Bare EPSG code of the product grid, no zero-padding (e.g., 3035)"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Single hyphenated version+revision token (R = Revision, not Release)"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{prefix}_{theme}-{variable}_{temporal_coverage}_{resolution}_{tile_id}_{epsg_code}_{version_revision}[.{extension}]",
+  "examples": [
+    "CLMS_NVLCC-IMCCS_C2018-2021_R20m_E09N27_3035_V01-R01.tif",
+    "CLMS_NVLCC-IMD_S2021_R10m_E09N27_3035_V01-R01.tif",
+    "CLMS_NVLCC-IBUC_C2018-2021_R20m_E37N28_3035_V01-R02.tif",
+    "CLMS_NVLCC-SBCC_C2018-2021_R100m_E37N28_3035_V01-R02.tif"
+  ],
+  "counter_examples": [
+    "CLMS_HRLNVLCC_IMCCS_C2018-2021_R20m_E09N27_03035_V01_R01.tif",
+    "CLMS_NVLCC_IMCCS_C2018-2021_R20m_E09N27_3035_V01-R01.tif"
+  ]
+}
