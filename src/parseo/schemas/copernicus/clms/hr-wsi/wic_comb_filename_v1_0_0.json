@@ -76,7 +76,7 @@
   },
   "template": "{programme}_{project}-{product}-{variable}-{sensor}_{sensing_datetime}_{resolution}_{tile_id}_{version_revision}[.{extension}]",
   "examples": [
-    "CLMS_WIC-WIC_20160720T105547_S1A_020m_T31TCH_V01-R00.tif"
+    "CLMS_WSI-WIC-WIC-COMB_20160720T105547_R20m_T31TCH_V01-R00.tif"
   ],
   "counter_examples": [
     "CLMS_WSI_WIC_020m_T31TCH_20160720T105547_S2A_V100_WIC-QA.tif"

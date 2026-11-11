@@ -35,12 +35,12 @@
     },
     "period_start": {
       "type": "string",
-      "pattern": "^\\d{8}P\\d+[MYD]$",
+      "pattern": "^A\\d{8}P\\d+[MYD]$",
       "description": "Aggregation period start"
     },
     "resolution": {
       "type": "string",
-      "pattern": "^\\d{1,3}m$",
+      "pattern": "^R\\d{1,3}m$",
       "description": "Spatial resolution"
     },
     "tile_id": {

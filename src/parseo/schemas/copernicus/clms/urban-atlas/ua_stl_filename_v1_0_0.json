@@ -34,7 +34,7 @@
     "type": {
       "type": "string",
       "enum": [
-        "VEC"
+        "V"
       ],
       "description": "Data type vector",
       "stac_map": {
@@ -44,6 +44,11 @@
           }
         }
       }
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^\\d{3}ha$",
+      "description": "Minimum mapping unit"
     },
     "area_code": {
       "type": "string",
@@ -76,7 +81,7 @@
       "description": "Single hyphenated version+revision (R=Revision)"
     }
   },
-  "template": "{programme}_{product}-{variable}_{survey}_{type}_{area_code}_{city}_{epsg_code}_{version_revision}_{production_date}[.{extension}]",
+  "template": "{programme}_{product}-{variable}_{survey}_{type}{resolution}_{area_code}_{city}_{epsg_code}_{version_revision}_{production_date}[.{extension}]",
   "examples": [
     "CLMS_UA-STL_S2021_V025ha_DK004L3_AALBORG_3035_V01-R00_20240212"
   ]

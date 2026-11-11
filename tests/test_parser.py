@@ -441,6 +441,32 @@ def test_parse_clms_hr_vpp_invalid_variable_reports_variable_field():
     assert "platform" not in message
 
 
+@pytest.mark.parametrize("reverse", [False, True])
+def test_near_miss_prefers_matching_legacy_schema(monkeypatch, reverse):
+    paths = list(parser._get_schema_paths("parseo"))
+    if reverse:
+        paths.reverse()
+    monkeypatch.setattr(parser, "_get_schema_paths", lambda pkg: paths)
+
+    name = "ST_20240101T123045_S2_E15N45-03035-010m_V100_PI.tif"
+    with pytest.raises(parser.ParseError) as exc:
+        parse_auto(name)
+
+    assert exc.value.field == "variable"
+    assert exc.value.value == "PI"
+    assert exc.value.match_family == "ST"
+
+
+def test_current_hr_vpp_invalid_variable_reports_variable_field():
+    name = "CLMS_VPP2-ST-INVALID_A20240101P10D_R10m_T33UVS_V01-R00.tif"
+    with pytest.raises(parser.ParseError) as exc:
+        parse_auto(name)
+
+    assert exc.value.field == "variable"
+    assert exc.value.value == "INVALID"
+    assert exc.value.match_family == "ST"
+
+
 def test_parse_clms_hr_vpp_tile_id_mgrs():
     name = "VPP_2017_S2_T32TPR-010m_V101_s1_AMPL.tif"
     result = parse_auto(name)
