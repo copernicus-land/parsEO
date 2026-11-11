@@ -52,7 +52,7 @@
       "stac_map": {
         "values": {
           "V": {
-            "type": "vector"
+            "representation": "vector"
           }
         }
       }

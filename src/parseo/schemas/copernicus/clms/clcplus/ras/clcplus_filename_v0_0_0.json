@@ -32,8 +32,8 @@
       "description": "Data class code (raster)",
       "stac_map": {
         "values": {
-          "RAS": {
-            "type": "raster"
+          "RASTER": {
+            "representation": "raster"
           }
         }
       }
