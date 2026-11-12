@@ -1,5 +1,13 @@
 name: CI
-on: [push, pull_request]
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -23,7 +31,6 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
           cache: pip
-          # bust cache when deps change
           cache-dependency-path: |
             pyproject.toml
             requirements*.txt
