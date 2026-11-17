@@ -2,8 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:egms-gnss-model",
   "schema_version": "0.0.0",
-  "status": "current",
-
+  "status": "deprecated",
   "description": "Copernicus European Ground Motion Service GNSS model filename.",
   "fields": {
     "product": {

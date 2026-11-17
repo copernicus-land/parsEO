@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hr-vpp:st",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "CLMS HR-VPP (VPP2) Seasonal Trajectories Plant Phenology Index product filename per the CLMS Filenaming Framework (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "VPP2"
+      ],
+      "description": "Product code"
+    },
+    "family": {
+      "type": "string",
+      "enum": [
+        "ST"
+      ],
+      "description": "Sub-product family (Seasonal Trajectories), hyphen-appended to the product code"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "PPI",
+        "QFLAG"
+      ],
+      "description": "Measurement code hyphen-appended to the compound"
+    },
+    "temporal_coverage": {
+      "type": "string",
+      "pattern": "^A\\d{8}P\\d{1,2}D$",
+      "description": "Aggregated temporal coverage with semantic 'A' prefix (ISO 8601 duration)"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^R\\d{1,3}m$",
+      "description": "Spatial resolution, no zero-padding"
+    },
+    "tile_id": {
+      "title": "MGRS",
+      "type": "string",
+      "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+      "description": "MGRS tile identifier (as used by Sentinel-2 products); CRS is implicit UTM, no EPSG field"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Single hyphenated version+revision token (R = Revision, not Release)"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif"
+      ],
+      "description": "File extension without leading dot"
+    }
+  },
+  "template": "{programme}_{product}-{family}-{variable}_{temporal_coverage}_{resolution}_{tile_id}_{version_revision}[.{extension}]",
+  "examples": [
+    "CLMS_VPP2-ST-PPI_A20240101P10D_R10m_T33UVS_V01-R00.tif",
+    "CLMS_VPP2-ST-QFLAG_A20240101P10D_R10m_T33UVS_V01-R00.tif"
+  ],
+  "counter_examples": [
+    "ST_20170101T000000_S2_E10N25-03035-010m_V101_PPI.tif",
+    "CLMS_VPP2-ST-PPI_A20240101P10D_R10m_T33UVS_3035_V01-R00.tif"
+  ]
+}

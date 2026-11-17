@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "copernicus:clms:hr-vpp:vpp",
   "schema_version": "0.0.0",
-  "status": "current",
+  "status": "deprecated",
   "stac_version": "1.1.0",
   "description": "Copernicus Land Monitoring Service HR-VPP Seasonal Trajectories filename schema for Sentinel-2 MGRS and EEA LAEA reference grid products.",
   "fields": {

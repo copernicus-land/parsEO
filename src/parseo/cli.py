@@ -136,6 +136,23 @@ def _build_arg_parser() -> argparse.ArgumentParser:
         help="Schema version to use (requires --family).",
     )
 
+    # serve
+    p_serve = sp.add_parser(
+        "serve",
+        help="Start the parsEO web API server (requires parseo[web])",
+    )
+    p_serve.add_argument(
+        "--host",
+        default="0.0.0.0",
+        help="Host to bind to (default: 0.0.0.0)",
+    )
+    p_serve.add_argument(
+        "--port",
+        type=int,
+        default=8000,
+        help="Port to listen on (default: 8000)",
+    )
+
     return ap
 
 
@@ -370,6 +387,18 @@ def main(argv: Union[List[str], None] = None) -> int:
         else:
             out = assemble_auto(fields)
         print(out)
+        return 0
+
+    if args.cmd == "serve":
+        try:
+            from parseo.web import start
+        except ImportError as e:
+            raise SystemExit(
+                f"web extra not installed. Run: pip install parseo[web]\n{e}"
+            )
+        host = getattr(args, "host", "0.0.0.0")
+        port = getattr(args, "port", 8000)
+        start(host=host, port=port)
         return 0
 
     ap.print_help()

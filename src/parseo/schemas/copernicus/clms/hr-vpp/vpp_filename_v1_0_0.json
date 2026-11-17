@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:hr-vpp:vpp",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "CLMS HR-VPP Vegetation Phenology Parameters filename per the CLMS Filenaming Framework (extension optional).",
+  "fields": {
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "product": {
+      "type": "string",
+      "enum": [
+        "VPP"
+      ],
+      "description": "Product code for Vegetation Phenology Parameters"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "SOSD",
+        "SOSN",
+        "EOSD",
+        "EOSN",
+        "LOSD",
+        "MAXD",
+        "AMPL",
+        "SPRG",
+        "AUTG",
+        "MTD"
+      ],
+      "description": "Vegetation Phenology Parameters variable"
+    },
+    "period_start": {
+      "type": "string",
+      "pattern": "^\\d{8}P\\d+[MYD]$",
+      "description": "Aggregation period start"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^\\d{1,3}m$",
+      "description": "Spatial resolution"
+    },
+    "tile_id": {
+      "title": "MGRS",
+      "type": "string",
+      "pattern": "^T\\d{2}[C-HJ-NP-X][A-Z]{2}$",
+      "description": "MGRS tile identifier"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Hyphenated version+revision"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "tif",
+        "xml"
+      ],
+      "description": "File extension"
+    }
+  },
+  "template": "{programme}_{product}-{variable}_{period_start}_{resolution}_{tile_id}_{version_revision}[.{extension}]",
+  "examples": [
+    "CLMS_VPP-SOSD_A20200101P1Y_R10m_T33UVS_V01-R00.tif"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "copernicus:clms:rz",
+  "schema_version": "1.0.0",
+  "status": "current",
+  "description": "Copernicus CLMS Riparian Zones filename per the CLMS Filenaming Framework (extension optional).",
+  "fields": {
+    "product": {
+      "type": "string",
+      "enum": [
+        "RZ"
+      ],
+      "description": "Product code"
+    },
+    "delivery_unit_id": {
+      "type": "string",
+      "pattern": "^DU\\d{3}[A-Z]$",
+      "description": "Delivery unit identifier (A=full delivery, B-Z=partial)"
+    },
+    "vriable": {
+      "type": "string",
+      "enum": [
+        "lclu"
+      ],
+      "description": "Product abbreviation"
+    },
+    "extension": {
+      "type": "string",
+      "enum": [
+        "shp",
+        "tif",
+        "gpkg"
+      ],
+      "description": "File extension without leading dot"
+    },
+    "version_revision": {
+      "type": "string",
+      "pattern": "^V\\d{2}-R\\d{2}$",
+      "description": "Single hyphenated version+revision (R=Revision)"
+    },
+    "variable": {
+      "type": "string",
+      "enum": [
+        "LCU"
+      ],
+      "description": "Land Cover/Land Use"
+    },
+    "programme": {
+      "type": "string",
+      "enum": [
+        "CLMS"
+      ],
+      "description": "Constant programme prefix"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "R"
+      ],
+      "description": "Data type raster"
+    },
+    "resolution": {
+      "type": "string",
+      "pattern": "^\\d{1,3}m$",
+      "description": "Spatial resolution, no zero-padding"
+    },
+    "tile_id": {
+      "type": "string",
+      "pattern": "^[EW]\\d{2,3}[NS]\\d{2,3}$",
+      "description": "LAEA tile identifier"
+    },
+    "epsg_code": {
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "description": "Bare EPSG code (e.g., 3035)"
+    },
+    "survey": {
+      "type": "string",
+      "pattern": "^(?:S\\d{4}|C\\d{4}-\\d{4})$",
+      "description": "Temporal coverage (e.g., S2018 or C2012-2018)"
+    }
+  },
+  "template": "{programme}_{product}-{variable}_{survey}_{type}{resolution}_{tile_id}_{epsg_code}_{version_revision}[.{extension}]",
+  "examples": [
+    "CLMS_RZ-LCU_S2018_R10m_E27N48_3035_V01-R00.tif"
+  ]
+}
